@@ -1,0 +1,69 @@
+
+<!doctype html>
+<html>
+<head>
+<title>Inkoop Assessment Code</title>
+</head>
+<body>
+    <h1>Number Game</h1>
+    <p>Build a game in js with following rules</p>
+    <ul>
+        <li>User has 1000 INR when he starts the game</li>
+        <li>Every try(click on start) is charged 100 INR</li>
+        <li>Game is over if user has less than 100 INR</li>
+        <li>Every try generates three random numbers, each random number is in 0-9 range</li>
+        <li>If all the numbers are odd/even (eg. 2 4 6), user gets 300 INR</li>
+        <li>If the numbers are in sequence with difference of 1 in any order (eg. 2 3 4 or 3 2 4 or 4 6 5), user gets 800 INR</li>
+        <li>If all the numbers are same (eg. 4 4 4), user gets 1000 INR</li>
+        <li>Else user gets no money</li>
+    </ul>
+    </div>
+
+    <h3>Game</h3>
+    <div>You have <span id="moneyLeft">1000</span> INR</div>
+    <button id="startButton" onclick="rand()" >Start</button>
+    <h3 id="randomNumbers">1 2 3</h3>
+    <div id="message"></div>
+    <script type="text/javascript">
+         total=1000;
+    function rand(){
+     var a=   Math.floor(Math.random() * 10);
+     var b=   Math.floor(Math.random() * 10);
+     var c=   Math.floor(Math.random() * 10);
+     document.getElementById("randomNumbers").innerHTML =a+' '+b+' '+c;
+     var arr=[a,b,c];
+     var ar1=arr.sort()
+
+     if (a==b&&a==c&&b==c){
+        total+=1000;
+        document.getElementById("message").innerHTML ='1000 added since all numbers are  equal'
+     }
+     else if (a%2==0&&b%2==0&&c%2==0){
+        total+=300;
+        document.getElementById("message").innerHTML ='300 added since all numbers are even'
+     }
+     else if (a%2!=0&&b%2!=0&&c%2!=0){
+        total+=300;
+        document.getElementById("message").innerHTML ='300 added since all numbers are odd'
+     }
+     else if(ar1[0]+1==ar1[1]&&ar1[1]+1==ar1[2]){
+        total+=800;
+        document.getElementById("message").innerHTML ='800 added since all numbers are in sequence'
+     }
+     else{
+        document.getElementById("message").innerHTML =''
+     }
+     total-=100;
+     document.getElementById("moneyLeft").innerHTML =total;
+     over();
+    }
+       function over(){
+        if (total<=0){document.getElementById("startButton").disabled = true;
+        document.getElementById("message").innerHTML ='Game over';
+    }
+        else
+            {document.getElementById("startButton").disabled = false;}
+       }     
+    </script>
+</body>
+</html>
